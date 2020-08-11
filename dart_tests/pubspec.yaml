@@ -19,6 +19,8 @@ dev_dependencies:
     sdk: flutter
   mockito: any
   test: any
+  bloc_test: ^7.0.0
+
 
 flutter:
 
