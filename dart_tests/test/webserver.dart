@@ -1,10 +1,16 @@
 // ## test/web_socket_server.dart
 
+// ## test/web_socket_test.dart
+
+@TestOn('browser')
 // The library loaded by spawnHybridUri() can import any packages that your
 // package depends on, including those that only work on the VM.
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_web_socket/shelf_web_socket.dart';
 import 'package:stream_channel/stream_channel.dart';
+import 'package:test/test.dart';
+
+import 'dart:html';
 
 // Once the hybrid isolate starts, it will call the special function
 // hybridMain() with a StreamChannel that's connected to the channel
@@ -19,15 +25,6 @@ hybridMain(StreamChannel channel) async {
   // it knows what to connect to.
   channel.sink.add(server.port);
 }
-
-
-// ## test/web_socket_test.dart
-
-@TestOn('browser')
-
-import 'dart:html';
-
-import 'package:test/test.dart';
 
 void main() {
   test('connects to a server-side WebSocket', () async {
