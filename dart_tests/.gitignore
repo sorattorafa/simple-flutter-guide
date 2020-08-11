@@ -1,4 +1,4 @@
 .packages
 pubspec.lock
-.dart_tool
-build
+.dart_tool/
+build/
