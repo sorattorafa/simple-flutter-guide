@@ -144,12 +144,49 @@ class _WidgetComEstadoState extends State<WidgetComEstado> {
 Is a pattern presented by Google at DartConf 2018, about code sharing between Flutter and AngularDart.
 
 #### Stream
-Stream is a sequence of asynchronous events to manage application state. 
-Streams are a native feature of the Dart language, that is, we can use them regardless of the platform (Flutter and AngularDart).
+Definitions:
+- Streams provide an asynchronous sequence of data. Data sequences include user-generated events and data read from files
+- Stream is a sequence of asynchronous events to manage application state. 
+- Streams are a native feature of the Dart language, that is, we can use them regardless of the platform (Flutter and AngularDart).
+- You can process a stream using either await for or listen() from the Stream API.
+
+Complete stream example:
+
+```dart
+import 'dart:async';
+
+Future<int> sumStream(Stream<int> stream) async {
+  var sum = 0;
+  try {
+    await for (var value in stream) {
+      sum += value;
+    }
+  } catch (e) {
+    return -1;
+  }
+  return sum;
+}
+
+Stream<int> countStream(int to) async* {
+  for (int i = 1; i <= to; i++) {
+    if (i == 4) {
+      throw new Exception('Intentional exception');
+    } else {
+      yield i;
+    }
+  }
+}
+
+main() async {
+  var stream = countStream(10);
+  var sum = await sumStream(stream);
+  print(sum); // -1
+}
+
+```
 
 #### Events 
 Events are any actions that change the state of our application. Be it the call to an API, the user logging in and even the increment of a counter.
-
 
 - Events to BLoC via sink;
 - BLoC set logical controller.
