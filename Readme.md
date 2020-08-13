@@ -141,7 +141,8 @@ class _WidgetComEstadoState extends State<WidgetComEstado> {
 
 ### BLOC Business Logic of Component
 > The goal of this library is to make it easy to separate presentation from business logic, facilitating testability and reusability.
-Is a pattern presented by Google at DartConf 2018, about code sharing between Flutter and AngularDart.
+
+- Is a pattern presented by Google at DartConf 2018, about code sharing between Flutter and AngularDart.
 
 #### Stream
 Definitions:
