@@ -7,7 +7,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Repository bloc = Repository();
+  final Repository bloc = Repository();
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +32,32 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                 }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FloatingActionButton(
+                  onPressed: bloc.decrementar,
+                  tooltip: 'Decrement',
+                  child: Icon(Icons.remove),
+                ),
+                FloatingActionButton(
+                  onPressed: bloc.zerar,
+                  tooltip: 'Zero',
+                  child: Icon(Icons.exposure_zero),
+                ),
+                FloatingActionButton(
+                  onPressed: bloc.incrementar,
+                  tooltip: 'Increment',
+                  child: Icon(Icons.add),
+                ),
+              ],
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: bloc.incrementar,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
     );
   }
+
   @override
   void dispose() {
     bloc.fecharStream();

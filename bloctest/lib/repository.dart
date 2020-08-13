@@ -15,7 +15,14 @@ class Repository {
     model.totalnum++;
     _blocController.sink.add(model.totalnum);
   }
-
+  decrementar() {
+    model.totalnum--;
+    _blocController.sink.add(model.totalnum);
+  }
+  zerar() {
+    model.totalnum = 0;
+    _blocController.sink.add(model.totalnum);
+  }
   fecharStream() {
     _blocController.close();
   }

@@ -250,7 +250,7 @@ This layer is the lowest level of the application and interacts with databases, 
 * MVVW complements BLOC layers because separate UI logic, Presentation Logic and Business Logic.
 
 *  <img width="500" alt="structure" src="figs/MVVMOverview.png">  
-* <img width="500" alt="structure" src="figs/mvvw.png"> |
+* <img width="500" alt="structure" src="figs/mvvw.png">
 
 
 ### Providers example 
