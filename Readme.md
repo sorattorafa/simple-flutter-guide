@@ -252,6 +252,10 @@ This layer is the lowest level of the application and interacts with databases, 
 *  <img width="500" alt="structure" src="figs/MVVMOverview.png">  
 * <img width="500" alt="structure" src="figs/mvvw.png"> |
 
+
+### Providers example 
+https://flutter.github.io/samples/provider_shopper.html
+
 ### Patterns [4, 5]
 
 ### Run tests
