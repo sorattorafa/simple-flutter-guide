@@ -261,14 +261,117 @@ This layer is the lowest level of the application and interacts with databases, 
 - BLoC / Rx
 - MobX
 - GetX
-
 - https://flutter.dev/docs/development/data-and-backend/state-mgmt/options
 
 ### Providers
 
 > Provider package allow app state management
 
+#### ChangeNotifier
 
+>  ChangeNotifier is a simple class included in the Flutter SDK which provides change notification to its listeners.
+- In provider, ChangeNotifier is one way to encapsulate your application state.
+- The only code that is specific to ChangeNotifier is the call to notifyListeners(). Call this method any time the model changes in a way that might change your app’s UI.
+- Cart model
+```dart 
+class CartModel extends ChangeNotifier {
+  /// Internal, private state of the cart.
+  final List<Item> _items = [];
+
+  /// An unmodifiable view of the items in the cart.
+  UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
+
+  /// The current total price of all items (assuming all items cost $42).
+  int get totalPrice => _items.length * 42;
+
+  /// Adds [item] to cart. This and [removeAll] are the only ways to modify the
+  /// cart from the outside.
+  void add(Item item) {
+    _items.add(item);
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+
+  /// Removes all items from the cart.
+  void removeAll() {
+    _items.clear();
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+}
+```
+- Test cart model
+```dart
+test('adding item increases total cost', () {
+  final cart = CartModel();
+  final startingPrice = cart.totalPrice;
+  cart.addListener(() {
+    expect(cart.totalPrice, greaterThan(startingPrice));
+  });
+  cart.add(Item('Dash'));
+});
+```
+
+#### ChangeNotifierProvider
+
+> ChangeNotifierProvider is the widget that provides an instance of a ChangeNotifier to its descendants. It comes from the provider package.
+
+- We already know where to put ChangeNotifierProvider: above the widgets that need to access it:
+- ChangeNotifierProvider example
+```dart
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartModel(),
+      child: MyApp(),
+    ),
+  );
+}
+```
+
+- MultiProvider
+```dart
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartModel()),
+        Provider(create: (context) => SomeOtherClass()),
+      ],
+      child: MyApp(),
+    ),
+  );
+}
+```
+
+
+#### Consumer
+
+- The only required argument of the Consumer widget is the builder. 
+- Builder is a function that is called whenever the ChangeNotifier changes.
+- When you call notifyListeners() in your model, all the builder methods of all the corresponding Consumer widgets are called.
+- We must specify the type of the model that we want to access. In this case, we want CartModel, so we write `Consumer<CartModel>`
+```dart
+return Consumer<CartModel>(
+  builder: (context, cart, child) {
+    return Text("Total price: ${cart.totalPrice}");
+  },
+);
+
+return Consumer<CartModel>(
+  builder: (context, cart, child) => Stack(
+        children: [
+          // Use SomeExpensiveWidget here, without rebuilding every time.
+          child,
+          Text("Total price: ${cart.totalPrice}"),
+        ],
+      ),
+  // Build the expensive widget here.
+  child: SomeExpensiveWidget(),
+);
+```
+
+#### Provider.of
 
 ### Patterns [4, 5]
 
