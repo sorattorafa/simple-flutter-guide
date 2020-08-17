@@ -253,9 +253,22 @@ This layer is the lowest level of the application and interacts with databases, 
 *  <img width="500" alt="structure" src="figs/MVVMOverview.png">  
 * <img width="500" alt="structure" src="figs/mvvw.png">
 
+### State management approaches 
+- Providers
+- setState
+- InheritedWidget & InheritedModel
+- Redux
+- BLoC / Rx
+- MobX
+- GetX
 
-### Providers example 
-https://flutter.github.io/samples/provider_shopper.html
+- https://flutter.dev/docs/development/data-and-backend/state-mgmt/options
+
+### Providers
+
+> Provider package allow app state management
+
+
 
 ### Patterns [4, 5]
 
@@ -284,3 +297,5 @@ If no file are provided, all test will be run.
 * [7] https://bloclibrary.dev/#/fluttertodostutorial
 * [8] https://fluttersamples.com
 * [9] https://www.devmedia.com.br/entendendo-o-pattern-model-view-viewmodel-mvvm/18411
+* [10]https://flutter.github.io/samples/provider_shopper.html
+* [11]https://flutter.dev/docs/development/data-and-backend/state-mgmt/options
