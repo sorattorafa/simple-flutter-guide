@@ -74,8 +74,10 @@ class _CartTotal extends StatelessWidget {
             // The important thing is that it will not rebuild
             // the rest of the widgets in this build method.
             Consumer<CartModel>(
-                builder: (context, cart, child) =>
-                    Text('\$${cart.totalPrice}', style: hugeStyle)),
+                builder: (context, cart, child) => (
+                  Text('Total compra: ${cart.totalPrice} \n\n Total produtos: ${cart.total} \n\n', style: hugeStyle)
+                ),  
+            ),
             SizedBox(width: 24),
             FlatButton(
               onPressed: () {
